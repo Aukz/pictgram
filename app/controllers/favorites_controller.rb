@@ -5,14 +5,14 @@ def index
 end
 
 def create
-  favorite = Favorites.new
+  favorite = Favorite.new
   favorite.user_id = current_user.id
   favorite.topic_id = params[:topic_id]
 
   if favorite.save
-    redirect_to topic_path, success: 'お気に入り登録しました'
+    redirect_to topics_path, success: 'お気に入り登録しました'
   else
-    redirect_to topic_path, danger: 'お気に入り登録に失敗しました'
+    redirect_to topics_path, danger: 'お気に入り登録に失敗しました'
   end
 end
 

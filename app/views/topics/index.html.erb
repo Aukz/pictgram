@@ -1,6 +1,7 @@
 <div class="topic-index-wrapper">
   <div class="container">
     <% @topic.each do |topic| %>
+    
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <div class="topic-index-single">
@@ -13,7 +14,9 @@
               <%= image_tag 'icons/heart-black.png', class: 'topic-index-icon' %>
               <% end %>
             <% end %>
-            <%= image_tag 'icons/comment.png', class: 'topic-index-icon' %>
+             <%= image_tag 'icons/comment.png', class: 'topic-index-icon' %>
+              <%=link_to "スターをつける" ,new_star_path(topic_id: topic.id),class: "btn btn-success" %>
+            スター：  <%#= topic.stars.first.star %>
             <p class="topic-text">
               <%= topic.description %>
             </p>

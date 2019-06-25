@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'stars/new'
+
     get 'topics/new'
 
     get 'sessions/new'
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
 
     resources :users
     resources :topics
+    resources :stars, only: [:index,:new,:create]
 
     get 'favorites/index'
     post "/favorites", to: "favorites#create"

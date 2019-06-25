@@ -5,7 +5,8 @@ class Topic < ApplicationRecord
 
   belongs_to :user
   has_many :favorites
-  has_many :favorite_user, through: :favorites, source: 'user'
+  has_many :favorite_users, through: :favorites, source: 'user'
+  has_many :stars
 
   mount_uploader :image, ImageUploader
 end
