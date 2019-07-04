@@ -2,7 +2,8 @@ class TopicsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @topic = Topic.all.includes(:favorite_users)
+    @topics = Topic.all.includes(:favorite_users, :comment_users)
+
   end
 
   def new
@@ -18,6 +19,10 @@ class TopicsController < ApplicationController
       render :new
     end
   end
+
+
+
+
 
   private
   def topic_params

@@ -1,7 +1,7 @@
 <div class="topic-index-wrapper">
   <div class="container">
-    <% @topic.each do |topic| %>
-    
+    <% @topics.each do |topic| %>
+
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <div class="topic-index-single">
@@ -9,17 +9,32 @@
               <%= topic.user.name %>
             </h2>
             <%= image_tag topic.image.url %>
-            <% if !topic.favorite_users.include?(current_user) %>
-              <%= link_to favorites_path(topic_id: topic.id), method: :post do %>
-              <%= image_tag 'icons/heart-black.png', class: 'topic-index-icon' %>
+            <% if logged_in? %>
+              <% if topic.favorite_by?(current_user)  %>
+                <%= link_to favorites_path(topic_id: topic.id), method: :delete do %>
+                <%= image_tag 'icons/heart-black.png', class: 'topic-index-icon' %>
+                <% end %>
+              <% else %>
+                <%= link_to favorites_path(topic_id: topic.id), method: :post do %>
+                <%= image_tag 'icons/heart.png', class: 'topic-index-icon' %>
               <% end %>
+            <%end%>
             <% end %>
-             <%= image_tag 'icons/comment.png', class: 'topic-index-icon' %>
+            <%= topic.favorites.count%>
+            <%= link_to new_comment_path(topic_id: topic.id) do%>
+             <%=image_tag 'icons/comment.png',  class: 'topic-index-icon' %>
+             <%end%>
               <%=link_to "スターをつける" ,new_star_path(topic_id: topic.id),class: "btn btn-success" %>
             スター：  <%#= topic.stars.first.star %>
             <p class="topic-text">
               <%= topic.description %>
             </p>
+            <p>コメント</p>
+            <p class = "topic-text">
+            <% topic.comments.each do |comment| %>
+              <%= comment.body %>
+            <% end %>
+          </p>
           </div>
         </div>
       </div>

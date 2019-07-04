@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   get 'stars/new'
 
     get 'topics/new'
@@ -19,9 +20,11 @@ Rails.application.routes.draw do
     resources :users
     resources :topics
     resources :stars, only: [:index,:new,:create]
+    resources :comments, only: [:index, :new, :create]
 
     get 'favorites/index'
     post "/favorites", to: "favorites#create"
+    delete "/favorites", to: "favorites#destroy"
 
 
 end
